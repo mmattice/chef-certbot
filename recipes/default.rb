@@ -4,8 +4,12 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-apt_repository 'certbot' do
-  uri        'ppa:certbot/certbot'
+include_recipe 'yum-epel' if platform_family?('rhel')
+
+if platform?('ubuntu')
+  apt_repository 'certbot' do
+    uri        'ppa:certbot/certbot'
+  end
 end
 
 package 'certbot'
